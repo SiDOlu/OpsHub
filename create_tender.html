@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-800">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOD-02 Canvas | Tender Specification Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { orange: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c' } }
+                }
+            }
+        }
+    </script>
+    <style>.panel-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }</style>
+</head>
+<body class="h-full font-sans bg-slate-50 flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-lg">SH</div>
+            <div>
+                <h1 class="font-bold text-slate-900 text-sm">MOD-02: Tender Specification & Standardized Requirement Creator</h1>
+                <p class="text-xs text-slate-500">St Helens Council | Service Request Creation Engine</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-8 w-full my-auto">
+        <form onsubmit="handlePublish(event)" class="panel-card rounded-2xl p-6 space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <h2 class="font-bold text-slate-900 text-sm">Create Standardized Service Requirement Broadcast</h2>
+                <p class="text-xs text-slate-500">Define package parameters without monetary values.</p>
+            </div>
+
+            <!-- Preset Templates -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Preset Specification Template</label>
+                <select onchange="applyTemplate(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-medium outline-none focus:border-orange-500">
+                    <option value="dom">Standard Domiciliary Care Package</option>
+                    <option value="assured">Assured Living Telecare & Alarm Setup</option>
+                    <option value="reablement">Hospital Discharge Rapid Reablement</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 text-xs font-medium">
+                <div>
+                    <label class="block text-slate-700 font-bold mb-1">Service User Ref ID</label>
+                    <input type="text" id="req-client" required value="SH-88902" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 outline-none focus:border-orange-500">
+                </div>
+                <div>
+                    <label class="block text-slate-700 font-bold mb-1">Required Weekly Hours</label>
+                    <input type="number" id="req-hours" required value="12" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 outline-none focus:border-orange-500">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Service Specification Title</label>
+                <input type="text" id="req-title" required value="2x Daily Medication Prompt & Mobility Support" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs outline-none focus:border-orange-500">
+            </div>
+
+            <div class="flex justify-end space-x-2 pt-4 border-t border-slate-100">
+                <button type="button" onclick="history.back()" class="px-4 py-2 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl">Cancel</button>
+                <button type="submit" class="px-5 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold rounded-xl shadow-md shadow-orange-600/20">Publish Requirement</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 px-6 py-4 text-xs text-slate-400 font-mono text-center">
+        MOD-02 CANVAS | ST HELENS TENDER SPECIFICATION ENGINE
+    </footer>
+
+    <script>
+        function applyTemplate(val) {
+            if(val === 'dom') {
+                document.getElementById('req-title').value = "2x Daily Medication Prompt & Mobility Support";
+                document.getElementById('req-hours').value = 12;
+            } else if(val === 'assured') {
+                document.getElementById('req-title').value = "Smart Fall Sensor & Lifeline Alarm Installation";
+                document.getElementById('req-hours').value = 4;
+            } else {
+                document.getElementById('req-title').value = "Rapid Discharge Reablement Care Package";
+                document.getElementById('req-hours').value = 20;
+            }
+        }
+        function handlePublish(e) {
+            e.preventDefault();
+            alert('Requirement Published successfully into St Helens Broadcast Dispatcher!');
+        }
+    </script>
+</body>
+</html>
