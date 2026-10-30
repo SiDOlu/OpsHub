@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-800">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOD-05 Canvas | Card Carousel Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { orange: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c' } }
+                }
+            }
+        }
+    </script>
+    <style>.panel-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }</style>
+</head>
+<body class="h-full font-sans bg-slate-50 flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-lg">SH</div>
+            <div>
+                <h1 class="font-bold text-slate-900 text-sm">MOD-05: Officer Side-by-Side Card Carousel Assessment Engine</h1>
+                <p class="text-xs text-slate-500">St Helens Council | Manual Section Weight Scoring (Price 40 / Quality 40 / Speed 20)</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-8 w-full my-auto space-y-4">
+        <!-- Carousel Controls -->
+        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200 text-xs font-bold">
+            <button onclick="changeCard(-1)" class="px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200"><i class="fa-solid fa-chevron-left mr-1"></i>Previous</button>
+            <span id="card-index" class="font-mono text-orange-600">Proposal 1 of 2</span>
+            <button onclick="changeCard(1)" class="px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200">Next<i class="fa-solid fa-chevron-right ml-1"></i></button>
+        </div>
+
+        <!-- Active Candidate Card -->
+        <div class="panel-card rounded-2xl p-6 space-y-4 border-2 border-orange-500">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <div>
+                    <h2 id="bid-provider" class="font-bold text-slate-900 text-sm">CarePlus North West</h2>
+                    <span class="text-[10px] font-bold uppercase text-orange-600 bg-orange-50 px-2 py-0.5 rounded border border-orange-200">TOP RANKED</span>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block">Total Officer Score</span>
+                    <span id="bid-total-score" class="font-mono font-bold text-xl text-slate-900">95 / 100</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block">Rate</span>
+                    <span id="bid-rate" class="font-mono font-bold">£21.50 / hr</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block">Lead Time</span>
+                    <span id="bid-lead" class="font-bold">24 Hours</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block">Staff Level</span>
+                    <span id="bid-qual" class="font-bold">Level 3 Senior</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block">Equipment</span>
+                    <span id="bid-equip" class="font-bold">Telecare Hub</span>
+                </div>
+            </div>
+
+            <!-- Manual Score Inputs -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <h3 class="font-bold text-xs uppercase text-slate-500">Manual Officer Section Scores</h3>
+                <div class="grid grid-cols-3 gap-3 text-xs font-medium">
+                    <div>
+                        <label class="block text-slate-600 mb-1">Price (Max 40)</label>
+                        <input type="number" id="score-p" value="38" onchange="calcTotal()" class="w-full bg-white border border-slate-200 p-2 rounded-lg font-mono font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Quality (Max 40)</label>
+                        <input type="number" id="score-q" value="38" onchange="calcTotal()" class="w-full bg-white border border-slate-200 p-2 rounded-lg font-mono font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Speed (Max 20)</label>
+                        <input type="number" id="score-s" value="19" onchange="calcTotal()" class="w-full bg-white border border-slate-200 p-2 rounded-lg font-mono font-bold">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="assignWinner()" class="w-full py-3 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs rounded-xl shadow-md shadow-orange-600/20">
+                Assign Preferred Provider & Close Tender
+            </button>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 px-6 py-4 text-xs text-slate-400 font-mono text-center">
+        MOD-05 CANVAS | ST HELENS CARD CAROUSEL ASSESSMENT
+    </footer>
+
+    <script>
+        const bids = [
+            { provider: 'CarePlus North West', rate: '£21.50 / hr', lead: '24 Hours', qual: 'Level 3 Senior', equip: 'Telecare Hub', p: 38, q: 38, s: 19 },
+            { provider: 'PrimeCare St Helens', rate: '£22.80 / hr', lead: '48 Hours', qual: 'Level 2 NVQ', equip: 'Thermometer Kit', p: 34, q: 36, s: 16 }
+        ];
+        let idx = 0;
+
+        function changeCard(dir) {
+            idx += dir;
+            if(idx < 0) idx = 0;
+            if(idx >= bids.length) idx = bids.length - 1;
+            document.getElementById('card-index').innerText = `Proposal ${idx + 1} of ${bids.length}`;
+            const b = bids[idx];
+            document.getElementById('bid-provider').innerText = b.provider;
+            document.getElementById('bid-rate').innerText = b.rate;
+            document.getElementById('bid-lead').innerText = b.lead;
+            document.getElementById('bid-qual').innerText = b.qual;
+            document.getElementById('bid-equip').innerText = b.equip;
+            document.getElementById('score-p').value = b.p;
+            document.getElementById('score-q').value = b.q;
+            document.getElementById('score-s').value = b.s;
+            calcTotal();
+        }
+
+        function calcTotal() {
+            const p = parseInt(document.getElementById('score-p').value) || 0;
+            const q = parseInt(document.getElementById('score-q').value) || 0;
+            const s = parseInt(document.getElementById('score-s').value) || 0;
+            document.getElementById('bid-total-score').innerText = (p + q + s) + ' / 100';
+        }
+
+        function assignWinner() {
+            alert('Provider assigned successfully! Broadcast status set to ASSIGNED / CLOSED.');
+        }
+    </script>
+</body>
+</html>
