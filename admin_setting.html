@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-800">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOD-01 Canvas | Admin Settings, Rights & RBAC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { orange: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        .panel-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    </style>
+</head>
+<body class="h-full font-sans bg-slate-50 flex flex-col justify-between">
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-lg">SH</div>
+            <div>
+                <h1 class="font-bold text-slate-900 text-sm">MOD-01: Admin Settings & Security Governance</h1>
+                <p class="text-xs text-slate-500">St Helens Council | Restricted Admin-Only View</p>
+            </div>
+        </div>
+        <span class="px-3 py-1 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-lg"><i class="fa-solid fa-lock mr-1.5"></i>ADMIN ONLY</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8 w-full my-auto space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- User Registry -->
+            <div class="lg:col-span-7 panel-card rounded-2xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                    <h2 class="font-bold text-xs uppercase tracking-wider text-slate-500">System Users Directory</h2>
+                    <button onclick="addUser()" class="text-xs bg-orange-600 text-white font-bold px-3 py-1.5 rounded-xl hover:bg-orange-500">+ Add User</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 text-slate-400 font-bold border-b border-slate-200 text-[10px]">
+                            <tr><th class="p-2.5">User</th><th class="p-2.5">Role</th><th class="p-2.5">Status</th><th class="p-2.5 text-right">Action</th></tr>
+                        </thead>
+                        <tbody id="users-table-body" class="divide-y divide-slate-100 font-medium">
+                            <tr>
+                                <td class="p-2.5 font-bold">Jane Doe</td>
+                                <td class="p-2.5"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded font-bold text-[10px]">Commissioning Officer</span></td>
+                                <td class="p-2.5 text-emerald-600 font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Active</td>
+                                <td class="p-2.5 text-right"><button onclick="editPermissions('Jane Doe')" class="text-orange-600 font-bold hover:underline">Rights</button></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold">Apex Care Ltd</td>
+                                <td class="p-2.5"><span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded font-bold text-[10px]">Care Provider</span></td>
+                                <td class="p-2.5 text-emerald-600 font-bold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Active</td>
+                                <td class="p-2.5 text-right"><button onclick="editPermissions('Apex Care')" class="text-orange-600 font-bold hover:underline">Rights</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Granular Permissions Matrix -->
+            <div class="lg:col-span-5 panel-card rounded-2xl p-6 space-y-4">
+                <h2 class="font-bold text-xs uppercase tracking-wider text-slate-500 border-b border-slate-100 pb-3">Permissions Matrix (RBAC)</h2>
+                <div class="space-y-2 text-xs font-medium">
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <span>Publish Service Tenders</span>
+                        <input type="checkbox" checked class="rounded text-orange-600 focus:ring-orange-500">
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <span>Side-by-Side Card Assessment</span>
+                        <input type="checkbox" checked class="rounded text-orange-600 focus:ring-orange-500">
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <span>Reopen Closed Tenders</span>
+                        <input type="checkbox" checked class="rounded text-orange-600 focus:ring-orange-500">
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <span>Quarantine Fleet Assets</span>
+                        <input type="checkbox" checked class="rounded text-orange-600 focus:ring-orange-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 px-6 py-4 text-xs text-slate-400 font-mono text-center">
+        MOD-01 CANVAS | ST HELENS COUNCIL ADMIN SECURITY SUBSYSTEM
+    </footer>
+
+    <script>
+        function addUser() { alert('Admin Action: Inviting new user via Azure AD SSO integration.'); }
+        function editPermissions(user) { alert('Editing RBAC permission scope for ' + user); }
+    </script>
+</body>
+</html>
