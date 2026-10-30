@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-800">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOD-07 Canvas | Asset & Fleet Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { orange: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c' } }
+                }
+            }
+        }
+    </script>
+    <style>.panel-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }</style>
+</head>
+<body class="h-full font-sans bg-slate-50 flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-lg">SH</div>
+            <div>
+                <h1 class="font-bold text-slate-900 text-sm">MOD-07: Asset & Medical Device Fleet Registry</h1>
+                <p class="text-xs text-slate-500">St Helens Council | Physical Equipment Inventory</p>
+            </div>
+        </div>
+        <button onclick="addAsset()" class="bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm hover:bg-orange-500">+ Register Device</button>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-8 w-full my-auto">
+        <div class="panel-card rounded-2xl overflow-hidden">
+            <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-400 font-bold border-b border-slate-200 text-[10px] uppercase">
+                    <tr><th class="p-3.5">Asset ID / Serial</th><th class="p-3.5">Device Name</th><th class="p-3.5">Category</th><th class="p-3.5">Status</th><th class="p-3.5">Location</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+                    <tr>
+                        <td class="p-3.5 font-bold font-mono">AST-101</td>
+                        <td class="p-3.5 font-bold">Braun ThermoScan 7 Infrared</td>
+                        <td class="p-3.5 text-slate-500">Diagnostic Tools</td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 font-bold rounded text-[10px]">In Stock</span></td>
+                        <td class="p-3.5 text-slate-500">Central Depot - St Helens</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3.5 font-bold font-mono">AST-102</td>
+                        <td class="p-3.5 font-bold">Omron M3 Blood Pressure Monitor</td>
+                        <td class="p-3.5 text-slate-500">Diagnostic Tools</td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 bg-blue-50 text-blue-700 font-bold rounded text-[10px]">In Use</span></td>
+                        <td class="p-3.5 text-slate-500">Service User Ref #SH-88401</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3.5 font-bold font-mono">AST-103</td>
+                        <td class="p-3.5 font-bold">Cellular Telecare Lifeline Hub v3</td>
+                        <td class="p-3.5 text-slate-500">Telecare Hubs</td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-bold rounded text-[10px]">Service Due</span></td>
+                        <td class="p-3.5 text-slate-500">Central Depot - St Helens</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 px-6 py-4 text-xs text-slate-400 font-mono text-center">
+        MOD-07 CANVAS | ST HELENS FLEET EQUIPMENT REGISTRY
+    </footer>
+
+    <script>
+        function addAsset() { alert('Asset Registration Modal launched!'); }
+    </script>
+</body>
+</html>
